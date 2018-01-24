@@ -29,19 +29,21 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', "Админ панель") }}
                 </a>
 
             </div>
 
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            @auth
                 <!-- Left Side Of Navbar -->
                 <ul class="topmenu nav  navbar-nav">
                     <li><a href="/admin">Главная админка</a></li>
                     <li class="active"><a href="/admin/pages">Посты</a></li>
                     <li><a href="/admin/users">Пользователи</a></li>
                 </ul>
+                @endauth
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

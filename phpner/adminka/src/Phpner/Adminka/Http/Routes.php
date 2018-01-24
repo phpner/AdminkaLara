@@ -1,9 +1,5 @@
 <?php
 
-Route::get("admin",[
-    'uses' => "Phpner\Adminka\Http\Controllers\AdminkaController@index"
-]);
-
 /**
  * Routes for Login to admin panel
  */
@@ -12,7 +8,7 @@ Route::group(['middleware'=> 'web'],function ()
     /**
      * show login form
      */
-route::get('login',[
+Route::get('login',[
     "uses" => "Phpner\Adminka\Http\Controllers\Auth\LoginController@showLoginForm",
     "as" => "login"
 ]);
@@ -21,7 +17,7 @@ route::get('login',[
      * Make Login to admin panel
      */
 
-route::post('login',[
+Route::post('login',[
     "uses" => "Phpner\Adminka\Http\Controllers\Auth\LoginController@login",
     "as" => "login"
 ]);
@@ -30,7 +26,7 @@ route::post('login',[
      * Snow registration form
      */
 
-route::get('/register',[
+Route::get('/register',[
     "uses" => "Phpner\Adminka\Http\Controllers\Auth\RegisterController@showRegistrationForm",
     "as" => "register"
 ]);
@@ -38,10 +34,22 @@ route::get('/register',[
     /**
      * Register a new user
      */
-route::post('/register',[
+Route::post('/register',[
     "uses" => "Phpner\Adminka\Http\Controllers\Auth\RegisterController@register",
     "as" => "register"
 ]);
+
+Route::post('/logout',function (){
+
+        Auth::logout(); return redirect('login');
+
+    });
+
+    Route::get("admin",[
+        'uses' => "Phpner\Adminka\Http\Controllers\AdminkaController@index"
+    ]);
+
+
 
 });
 
@@ -49,8 +57,11 @@ route::post('/register',[
 /**
  * Routes admin panel
  */
-Route::group(['middleware'=> 'auth'],function ()
+Route::group(['middleware'=> ['auth','web']],function ()
 {
+    /**
+     * Main admin panel
+     */
 
 
 });

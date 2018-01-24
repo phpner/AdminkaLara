@@ -1,10 +1,12 @@
 <?php
 namespace Phpner\Adminka\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Phpner\Adminka\Http\Controllers\AdminBaseController as AdminBaseController;
+use Illuminate\Http\Request;
+use Auth;
 
-class LoginController extends AdminBaseController
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -19,23 +21,33 @@ class LoginController extends AdminBaseController
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
     public function showLoginForm()
     {
+        if (Auth::check())
+            return redirect()->back();
+
         return view('phpner::views\auth\login');
     }
+
+    public function login(Request $request)
+    {
+
+        $remember = $request->has("remember");
+
+       $or =  Auth::attempt(
+        [
+            'email' => $request['email'],
+            'password' => $request['password']
+        ],
+           $remember
+        );
+
+        if($or)
+            return redirect('/admin');
+                return redirect()->back()->withInput($request->only('email','remember'))->withErrors(['email' => 'Ошибка Email или пароль !']);
+
+    }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

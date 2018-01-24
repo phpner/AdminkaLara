@@ -15,6 +15,7 @@ class PhpnerAdminkaProvider extends ServiceProvider
     {
         $this->loadRoutesFrom( __DIR__ ."/Http/Routes.php");
         $this->loadViewsFrom(__DIR__.'/Resources/', 'phpner');
+        $this->loadMigrationsFrom(__DIR__.'/migrations/');
     }
 
     /**
