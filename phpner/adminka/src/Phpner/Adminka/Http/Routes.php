@@ -49,7 +49,12 @@ Route::post('/logout',function (){
         'uses' => "Phpner\Adminka\Http\Controllers\AdminkaController@index"
     ]);
 
-
+    Route::get("admin",[
+        'uses' => "Phpner\Adminka\Http\Controllers\AdminkaController@index"
+    ]);
+    Route::get("admin/users",[
+        'uses' => "Phpner\Adminka\Http\Controllers\AdminkaController@users"
+    ]);
 
 });
 
@@ -57,11 +62,3 @@ Route::post('/logout',function (){
 /**
  * Routes admin panel
  */
-Route::group(['middleware'=> ['auth','web']],function ()
-{
-    /**
-     * Main admin panel
-     */
-
-
-});

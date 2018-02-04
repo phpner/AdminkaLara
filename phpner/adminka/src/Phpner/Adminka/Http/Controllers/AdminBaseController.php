@@ -11,9 +11,8 @@ class AdminBaseController extends  BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    function __construct()
+    public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','web']);
     }
-
 }

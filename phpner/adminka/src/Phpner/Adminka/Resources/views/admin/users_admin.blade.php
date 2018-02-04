@@ -1,4 +1,4 @@
-@extends('layouts.admin_layouts')
+@extends('phpner::views\layouts.admin_layouts')
 
 @section('content')
     <div class="container">
@@ -24,9 +24,9 @@
                                     <form action="/admin/users/changerule" method="post">
                                         <td>{{$user->name}}&nbsp;</td>
                                         <td>{{$user->email}}&nbsp;</td>
-                                        <td><input type="checkbox" name="selection" {{$user->hasRole('Admin') ? 'checked' : 'нет'}}></td>
+                                        {{--<td><input type="checkbox" name="selection" {{$user->hasRole('Admin') ? 'checked' : 'нет'}}></td>
                                         <td><input type="checkbox" name="selection" {{$user->hasRole('author') ? 'checked' : 'нет'}}></td>
-                                        <td><input type="checkbox" name="selection" {{$user->hasRole('user') ? 'checked' : 'нет'}}></td>
+                                        <td><input type="checkbox" name="selection" {{$user->hasRole('user') ? 'checked' : 'нет'}}></td>--}}
                                         {{ csrf_field() }}
                                         <td><button type="submit">Изменить роль</button></td>
                                     </form>
